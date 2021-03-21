@@ -1,5 +1,3 @@
-import java.lang.IllegalArgumentException
-
 object Hamming {
 
     fun compute(leftStrand: String, rightStrand: String): Int {
@@ -8,13 +6,12 @@ object Hamming {
             throw IllegalArgumentException("left and right strands must be of equal length")
         }
 
-        var hammingDistance: Int = 0
-        for ((i, dnaStrand) in leftStrand.withIndex()) {
-            if (dnaStrand != rightStrand[i]) {
-                hammingDistance++
+        return leftStrand.foldIndexed(0, { index, acc, letter ->
+            if (letter != rightStrand[index]) {
+                acc + 1
+            } else {
+                acc
             }
-        }
-
-        return hammingDistance
+        })
     }
 }
